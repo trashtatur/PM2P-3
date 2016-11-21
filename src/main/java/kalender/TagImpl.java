@@ -10,8 +10,12 @@ public class TagImpl implements Tag {
 	private Calendar intern; 
 	
 	public TagImpl(int jahr, int tagImJahr) {
+		intern = Calendar.getInstance();
+		intern.set(jahr,tagImJahr);
 	}
 	public TagImpl(int jahr, int monat, int tagImMonat) {
+		intern = Calendar.getInstance();
+		intern.set(jahr,monat,tagImMonat);
 	}
 	
 	public TagImpl(Tag tag) {
