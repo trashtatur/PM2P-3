@@ -43,62 +43,59 @@ public class DatumImpl implements Datum {
 
 	@Override
 	public Tag getTag() {
-		// TODO Auto-generated method stub
-		return null;
+		return new TagImpl(intern.get(Calendar.YEAR),
+				           intern.get(Calendar.MONTH),
+				           intern.get(Calendar.DAY_OF_MONTH));
 	}
 
 	@Override
 	public Woche getWoche() {
-		// TODO Auto-generated method stub
-		return null;
+		return new WocheImpl(intern.get(Calendar.YEAR),
+							 intern.get(Calendar.MONTH),
+				             intern.get(Calendar.WEEK_OF_MONTH));
 	}
 
 	@Override
 	public Monat getMonat() {
-		// TODO Auto-generated method stub
-		return null;
+		return new MonatImpl(intern.get(Calendar.YEAR),
+				             intern.get(Calendar.MONTH));
+
 	}
 
 	@Override
 	public Uhrzeit getUhrzeit() {
-		// TODO Auto-generated method stub
-		return null;
+		return new UhrzeitImpl(intern.get(Calendar.HOUR),
+				               intern.get(Calendar.MINUTE));
 	}
 
 	@Override
 	public int getJahr() {
-		// TODO Auto-generated method stub
-		return 0;
+		return intern.get(Calendar.YEAR);
 	}
 
 	@Override
 	public int getTagImMonat() {
-		// TODO Auto-generated method stub
-		return 0;
+		return intern.get(Calendar.DAY_OF_MONTH);
 	}
 
 	@Override
 	public int getTagImJahr() {
-		// TODO Auto-generated method stub
-		return 0;
+		return intern.get(Calendar.DAY_OF_YEAR);
 	}
 
 	@Override
 	public int getWocheImMonat() {
-		// TODO Auto-generated method stub
-		return 0;
+		return intern.get(Calendar.WEEK_OF_MONTH);
 	}
 
 	@Override
 	public int getWocheImJahr() {
-		// TODO Auto-generated method stub
-		return 0;
+		return intern.get(Calendar.WEEK_OF_YEAR);
 	}
 
 	@Override
 	public int getMonatImJahr() {
-		// TODO Auto-generated method stub
-		return 0;
+		return intern.get(Calendar.MONTH);
 	}
 
 	@Override
