@@ -22,12 +22,16 @@ public class DatumImpl implements Datum {
 		intern.set(Calendar.MONTH,tag.getTagImMonat());
 	}
 	public DatumImpl(Tag tag, Uhrzeit uhrzeit ) {
+		this(tag);
+		intern.set(Calendar.HOUR,uhrzeit.getStunde());
+		intern.set(Calendar.MINUTE,uhrzeit.getMinuten());
 	}
 
 	public DatumImpl(Datum d) {
 	}
 
 	private DatumImpl(Calendar intern) {
+
 	}
 	
 	
