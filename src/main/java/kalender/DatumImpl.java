@@ -15,6 +15,11 @@ public class DatumImpl implements Datum {
 	private Calendar intern;
 	
 	public DatumImpl(Tag tag){
+		intern=Calendar.getInstance();
+		intern.clear();
+		intern.set(Calendar.YEAR,tag.getJahr());
+		intern.set(Calendar.DAY_OF_YEAR,tag.getTagImJahr());
+		intern.set(Calendar.MONTH,tag.getTagImMonat());
 	}
 	public DatumImpl(Tag tag, Uhrzeit uhrzeit ) {
 	}
