@@ -28,10 +28,13 @@ public class DatumImpl implements Datum {
 	}
 
 	public DatumImpl(Datum d) {
+		this(d.getTag(),d.getUhrzeit());
 	}
 
 	private DatumImpl(Calendar intern) {
-
+		this(new TagImpl(intern.get(Calendar.YEAR),
+				         intern.get(Calendar.MONTH),
+				         intern.get(Calendar.DAY_OF_MONTH)));
 	}
 	
 	
