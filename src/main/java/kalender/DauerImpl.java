@@ -75,6 +75,7 @@ public class DauerImpl implements Dauer {
 	@Override
 	public int anteilWochen() {
 
+		return 0;
 	}
 
 }
