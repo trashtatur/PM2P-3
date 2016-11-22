@@ -128,7 +128,7 @@ public class DatumImpl implements Datum {
 
 	@Override
 	public int inMinuten() {
-		return (int) (intern.getTimeInMillis() / .001 / 60);
+		return (int) (intern.getTimeInMillis() / 100 / 60);
 	}
 
 	@Override
