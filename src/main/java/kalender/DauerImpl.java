@@ -14,15 +14,19 @@ public class DauerImpl implements Dauer {
 	private int minuten;
 	
 	public DauerImpl(Datum d1, Datum d2) {
+		this(d1.abstand(d2).inMinuten());
 	}
 
 	public DauerImpl(int minuten) {
+		this.minuten=minuten;
 	}
 	
 	public DauerImpl(int stunden, int minuten) {
+		this((stunden*60)+minuten);
 	}
 
 	public DauerImpl(int tage, int stunden, int minuten) {
+		this((tage*24*60)+(stunden*60)+minuten);
 	}
 
 	@Override
