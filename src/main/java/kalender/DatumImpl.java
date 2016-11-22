@@ -32,16 +32,13 @@ public class DatumImpl implements Datum {
 	}
 
 	private DatumImpl(Calendar intern) {
-		this(new TagImpl(intern.get(Calendar.YEAR),
-				         intern.get(Calendar.MONTH),
-				         intern.get(Calendar.DAY_OF_MONTH)));
+		this.intern=intern;
 	}
 	
 	
 	@Override
 	public int compareTo(Datum o) {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.inMinuten()-o.inMinuten();
 	}
 
 	@Override
@@ -73,31 +70,37 @@ public class DatumImpl implements Datum {
 
 	@Override
 	public int getJahr() {
+
 		return intern.get(Calendar.YEAR);
 	}
 
 	@Override
 	public int getTagImMonat() {
+
 		return intern.get(Calendar.DAY_OF_MONTH);
 	}
 
 	@Override
 	public int getTagImJahr() {
+
 		return intern.get(Calendar.DAY_OF_YEAR);
 	}
 
 	@Override
 	public int getWocheImMonat() {
+
 		return intern.get(Calendar.WEEK_OF_MONTH);
 	}
 
 	@Override
 	public int getWocheImJahr() {
+
 		return intern.get(Calendar.WEEK_OF_YEAR);
 	}
 
 	@Override
 	public int getMonatImJahr() {
+
 		return intern.get(Calendar.MONTH);
 	}
 
@@ -115,20 +118,17 @@ public class DatumImpl implements Datum {
 
 	@Override
 	public Dauer abstand(Datum d) {
-		// TODO Auto-generated method stub
-		return null;
+		return new DauerImpl(this.compareTo(d));
 	}
 
 	@Override
 	public long differenzInTagen(Datum d) {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.abstand(d).inTagen();
 	}
 
 	@Override
 	public int inMinuten() {
-		// TODO Auto-generated method stub
-		return 0;
+		return (int) (intern.getTimeInMillis() / .001 / 60);
 	}
 
 	@Override
