@@ -28,7 +28,8 @@ public class DatumImpl implements Datum {
 	}
 
 	public DatumImpl(Datum d) {
-		this(d.getTag(),d.getUhrzeit());
+
+        this(d.getTag(),d.getUhrzeit());
 	}
 
 	private DatumImpl(Calendar intern) {
@@ -107,14 +108,14 @@ public class DatumImpl implements Datum {
 
 	@Override
 	public Datum add(Dauer dauer) {
-		// TODO Auto-generated method stub
-		return null;
+		intern.add(Calendar.MINUTE,dauer.inMinuten());
+        return this;
 	}
 
 	@Override
 	public Datum sub(Dauer dauer) {
-		// TODO Auto-generated method stub
-		return null;
+		intern.add(Calendar.MINUTE,-(dauer.inMinuten()));
+        return this;
 	}
 
 	@Override
@@ -138,7 +139,8 @@ public class DatumImpl implements Datum {
 
 	@Override
 	public Calendar inBasis() {
-		return this.intern= (Calendar) intern.clone();
+
+        return this.intern= (Calendar) intern.clone();
 	}
 
 }
