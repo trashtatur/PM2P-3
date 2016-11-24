@@ -31,8 +31,7 @@ public class DauerImpl implements Dauer {
 
 	@Override
 	public int compareTo(Dauer o) {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.inMinuten()-o.inMinuten();
 	}
 
 	@Override
