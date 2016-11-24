@@ -25,8 +25,7 @@ public class TerminImpl implements Termin {
 
 	@Override
 	public int compareTo(Termin o) {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.getDatum().compareTo(o.getDatum());
 	}
 
 	@Override
