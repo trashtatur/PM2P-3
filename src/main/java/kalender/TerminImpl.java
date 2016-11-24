@@ -67,4 +67,25 @@ public class TerminImpl implements Termin {
 		return null;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		TerminImpl termin = (TerminImpl) o;
+
+		if (!getDatum().equals(termin.getDatum())) return false;
+		if (!getDauer().equals(termin.getDauer())) return false;
+		return getBeschreibung() != null ? getBeschreibung().equals(termin.getBeschreibung()) : termin.getBeschreibung() == null;
+
+	}
+
+	@Override
+	public int hashCode() {
+		int result = getDatum().hashCode();
+		result = 31 * result + getDauer().hashCode();
+		result = 31 * result + (getBeschreibung() != null ? getBeschreibung().hashCode() : 0);
+		return result;
+	}
+
 }
