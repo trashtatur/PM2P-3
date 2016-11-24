@@ -30,20 +30,17 @@ public class TerminImpl implements Termin {
 
 	@Override
 	public String getBeschreibung() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.beschreibung;
 	}
 
 	@Override
 	public Datum getDatum() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.datum;
 	}
 
 	@Override
 	public Dauer getDauer() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.dauer;
 	}
 
 	@Override
