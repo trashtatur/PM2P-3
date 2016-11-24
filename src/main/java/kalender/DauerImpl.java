@@ -61,19 +61,21 @@ public class DauerImpl implements Dauer {
 	@Override
 	public int anteilMinuten() {
 
-		return minuten-this.anteilStunden();
+		return (minuten-this.anteilWochen()-this.anteilTage()-this.anteilStunden());
+
 	}
 
 	@Override
 	public int anteilStunden() {
 
-		return minuten - this.anteilTage();
+		return (minuten-this.anteilWochen()-this.anteilTage())-
+				(minuten-this.anteilWochen()-this.anteilTage())%60;
 	}
 
 	@Override
 	public int anteilTage() {
 
-		return minuten-this.anteilWochen();
+		return minuten-this.anteilWochen()-(minuten-this.anteilWochen())%1440;
 	}
 
 	@Override
