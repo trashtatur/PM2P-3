@@ -45,8 +45,8 @@ public class TerminImpl implements Termin {
 
 	@Override
 	public Termin verschiebeAuf(Datum datum) {
-		// TODO Auto-generated method stub
-		return null;
+		this.datum=datum;
+        return this;
 	}
 
 	@Override
