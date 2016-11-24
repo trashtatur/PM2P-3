@@ -37,45 +37,50 @@ public class DauerImpl implements Dauer {
 
 	@Override
 	public int inMinuten() {
-		return minuten;
+
+        return minuten;
 	}
 
 	@Override
 	public int inStunden() {
+
 		return this.inMinuten()/60;
 	}
 
 	@Override
 	public int inTagen() {
+
 		return this.inStunden()/24;
 	}
 
 	@Override
 	public int inWochen() {
+
 		return this.inTagen()/7;
 	}
 
 	@Override
 	public int anteilMinuten() {
-		return minuten-(this.inStunden()*60);
+
+		return minuten-this.anteilStunden();
 	}
 
 	@Override
 	public int anteilStunden() {
-		// TODO Auto-generated method stub
-		return 0;
+
+		return minuten - this.anteilTage();
 	}
 
 	@Override
 	public int anteilTage() {
-		// TODO Auto-generated method stub
-		return 0;
+
+		return minuten-this.anteilWochen();
 	}
 
 	@Override
 	public int anteilWochen() {
 
-		return 0;
+		return minuten-(minuten%10080);
 	}
 
 }
