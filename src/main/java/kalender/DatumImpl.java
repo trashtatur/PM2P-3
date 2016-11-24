@@ -140,7 +140,7 @@ public class DatumImpl implements Datum {
 	@Override
 	public Calendar inBasis() {
 
-        return this.intern= (Calendar) intern.clone();
+        return (Calendar) intern.clone();
 	}
 
 }
