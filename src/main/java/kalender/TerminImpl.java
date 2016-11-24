@@ -1,5 +1,6 @@
 package kalender;
 
+import java.util.Calendar;
 import java.util.Map;
 
 import kalender.interfaces.Datum;
@@ -11,7 +12,14 @@ import kalender.interfaces.Woche;
 
 public class TerminImpl implements Termin {
 
+	private Datum datum;
+    private Dauer dauer;
+    private String beschreibung;
+
 	public TerminImpl(String beschreibung, Datum datum, Dauer dauer) {
+        this.datum=datum;
+        this.beschreibung=beschreibung;
+        this.dauer=dauer;
 	}
 
 
