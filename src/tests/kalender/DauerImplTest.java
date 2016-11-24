@@ -40,12 +40,14 @@ public class DauerImplTest {
 
     @Test
     public void inTagen() throws Exception {
-
+        assertEquals(zerodauer.inTagen(),zeromin/60/24);
+        assertEquals(dauer.inTagen(), (minuten/60)/24);
     }
 
     @Test
     public void inWochen() throws Exception {
-
+        assertEquals(zerodauer.inWochen(),zeromin/60/24/7);
+        assertEquals(dauer.inWochen(), (minuten/60)/24/7);
     }
 
     @Test
@@ -65,7 +67,7 @@ public class DauerImplTest {
 
     @Test
     public void anteilWochen() throws Exception {
-        assertEquals(dauer.anteilWochen(),minuten-2140);
+        assertEquals(dauer.anteilWochen(),20160);
     }
 
 }
