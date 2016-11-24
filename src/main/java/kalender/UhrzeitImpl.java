@@ -22,17 +22,20 @@ public class UhrzeitImpl implements Uhrzeit {
 	}
 
 	public UhrzeitImpl(Uhrzeit o) {
-		this(o.getStunde(), o.getMinuten());
+
+        this(o.getStunde(), o.getMinuten());
 	}
 
 	@Override
 	public int compareTo(Uhrzeit o) {
-		// TODO Auto-generated method stub
-		return 0;
+		if (this.getStunde()>o.getStunde()||this.getMinuten()>o.getMinuten()) return 1;
+        else if (this.getStunde()==o.getStunde()||this.getMinuten()==o.getMinuten()) return 0;
+        else return -1;
 	}
 
 	@Override
 	public int getStunde() {
+
 		return intern.get(Calendar.HOUR_OF_DAY);
 	}
 
