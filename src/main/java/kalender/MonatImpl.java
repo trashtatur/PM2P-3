@@ -14,6 +14,10 @@ public class MonatImpl implements Monat {
 	private Calendar intern;
 
 	public MonatImpl(int jahr, int monat) {
+		intern=Calendar.getInstance();
+        intern.clear();
+        intern.set(Calendar.YEAR, jahr);
+        intern.set(Calendar.MONTH, monat);
 	}
 
 	@Override
