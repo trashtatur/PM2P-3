@@ -38,6 +38,7 @@ public class DatumImpl implements Datum {
 	
 	@Override
 	public int compareTo(Datum o) {
+
 		return this.inMinuten()-o.inMinuten();
 	}
 
@@ -118,23 +119,26 @@ public class DatumImpl implements Datum {
 
 	@Override
 	public Dauer abstand(Datum d) {
+
 		return new DauerImpl(this.compareTo(d));
+
 	}
 
 	@Override
 	public long differenzInTagen(Datum d) {
-		return this.abstand(d).inTagen();
+
+        return this.abstand(d).inTagen();
 	}
 
 	@Override
 	public int inMinuten() {
-		return (int) (intern.getTimeInMillis() / 100.0 / 60);
+
+        return (int) (intern.getTimeInMillis() / 100.0 / 60);
 	}
 
 	@Override
 	public Calendar inBasis() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.intern= (Calendar) intern.clone();
 	}
 
 }
