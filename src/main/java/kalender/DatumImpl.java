@@ -11,7 +11,7 @@ import kalender.interfaces.Woche;
 
 public class DatumImpl implements Datum {
 
-
+gi
 	private Calendar intern;
 	
 	public DatumImpl(Tag tag){
@@ -134,7 +134,7 @@ public class DatumImpl implements Datum {
 	@Override
 	public int inMinuten() {
 
-        return (int) (intern.getTimeInMillis() / 100.0 / 60);
+		return  (int)((intern.getTimeInMillis()/1000.0)/60);
 	}
 
 	@Override
