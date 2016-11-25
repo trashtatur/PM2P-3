@@ -25,11 +25,17 @@ public class DauerImplTest {
 
     @Test
     public void isSame() throws Exception {
-        assertEquals(   dauer.anteilWochen()+
-                        dauer.anteilTage()+
-                        dauer.anteilStunden()+
-                        dauer.anteilMinuten(),
-                minuten);
+        assertEquals(zerodauer.anteilWochen()+
+                     zerodauer.anteilTage()+
+                     zerodauer.anteilStunden()+
+                     zerodauer.anteilMinuten(),
+                     zeromin);
+
+        assertEquals(dauer.anteilWochen()+
+                     dauer.anteilTage()+
+                     dauer.anteilStunden()+
+                     dauer.anteilMinuten(),
+                     minuten);
     }
 
     @Test
