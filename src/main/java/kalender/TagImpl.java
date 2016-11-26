@@ -19,18 +19,25 @@ public class TagImpl implements Tag {
 	}
 	
 	public TagImpl(Tag tag) {
+		intern = Calendar.getInstance();
+		intern.set(tag.getJahr(),tag.getMonat(),tag.getTagImMonat());
 	}
 
 	@Override
 	public Datum getStart() {
-		// TODO Auto-generated method stub
-		return null;
+		Calendar copy = (Calendar) intern.clone();
+		copy.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+		return new DatumImpl(
+				new TagImpl(copy.get(Calendar.YEAR), copy.get(Calendar.MONTH), copy.get(Calendar.DAY_OF_MONTH)));
 	}
 
 	@Override
 	public Datum getEnde() {
-		// TODO Auto-generated method stub
-		return null;
+		Calendar copy = (Calendar) intern.clone();
+		copy.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+		return new DatumImpl(
+				new TagImpl(copy.get(Calendar.YEAR), copy.get(Calendar.MONTH), copy.get(Calendar.DAY_OF_MONTH)),
+				new UhrzeitImpl(23, 59));
 	}
 
 	@Override
@@ -41,38 +48,32 @@ public class TagImpl implements Tag {
 
 	@Override
 	public int getJahr() {
-		// TODO Auto-generated method stub
-		return 0;
+		return intern.get(Calendar.YEAR);
 	}
 
 	@Override
 	public int getMonat() {
-		// TODO Auto-generated method stub
-		return 0;
+		return intern.get(Calendar.MONTH)
 	}
 
 	@Override
 	public int getTagImJahr() {
-		// TODO Auto-generated method stub
-		return 0;
+		return intern.get(Calendar.DAY_OF_YEAR);
 	}
 
 	@Override
 	public int getTagImMonat() {
-		// TODO Auto-generated method stub
-		return 0;
+		return intern.get(Calendar.DAY_OF_MONTH);
 	}
 
 	@Override
 	public long differenzInTagen(Tag other) {
-		// TODO Auto-generated method stub
-		return 0;
+		return null;
 	}
 
 	@Override
 	public Calendar inBasis() {
-		// TODO Auto-generated method stub
-		return null;
+		return null
 	}
 
 }
