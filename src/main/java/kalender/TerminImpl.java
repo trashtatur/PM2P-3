@@ -1,6 +1,7 @@
 package kalender;
 
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Map;
 
 import kalender.interfaces.Datum;
@@ -51,20 +52,29 @@ public class TerminImpl implements Termin {
 
 	@Override
 	public Map<Datum, Termin> termineIn(Monat monat) {
-		// TODO Auto-generated method stub
-		return null;
+		Map<Datum,Termin> termineInMap=new HashMap<Datum,Termin>();
+		if (this.getDatum().getMonatImJahr() == monat.getMonat()) {
+            termineInMap.put(this.datum,this);
+        }
+        return termineInMap;
 	}
 
 	@Override
 	public Map<Datum, Termin> termineIn(Woche woche) {
-		// TODO Auto-generated method stub
-		return null;
+        Map<Datum,Termin> termineInMap=new HashMap<Datum,Termin>();
+        if (this.getDatum().getWoche().getWocheImMonat() == woche.getWocheImMonat()) {
+            termineInMap.put(this.datum,this);
+        }
+        return termineInMap;
 	}
 
 	@Override
 	public Map<Datum, Termin> termineAn(Tag tag) {
-		// TODO Auto-generated method stub
-		return null;
+        Map<Datum,Termin> termineInMap=new HashMap<Datum,Termin>();
+        if (this.getDatum().getTag().getTagImMonat() == tag.getTagImMonat()) {
+            termineInMap.put(this.datum,this);
+        }
+        return termineInMap;
 	}
 
 	@Override
