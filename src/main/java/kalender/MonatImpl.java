@@ -22,26 +22,32 @@ public class MonatImpl implements Monat {
 
 	@Override
 	public Datum getStart() {
-		// TODO Auto-generated method stub
-		return null;
+		Calendar copy = (Calendar) intern.clone();
+		copy.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+		return new DatumImpl(
+				new TagImpl(copy.get(Calendar.YEAR), copy.get(Calendar.MONTH), copy.get(Calendar.DAY_OF_MONTH)));
 	}
 
 	@Override
 	public Datum getEnde() {
-		// TODO Auto-generated method stub
+		Calendar copy = (Calendar) intern.clone();
+		copy.set(Calendar.DAY_OF_MONTH, Calendar.SUNDAY);
+		return new DatumImpl(
+				new TagImpl(copy.get(Calendar.YEAR), copy.get(Calendar.MONTH), copy.get(Calendar.DAY_OF_MONTH)),
+				new UhrzeitImpl(23, 59));
 		return null;
 	}
 
 	@Override
 	public int getMonat() {
-		// TODO Auto-generated method stub
-		return 0;
+		Calendar copy = intern.clone();
+		return copy.get(Calendar.MONTH);
 	}
 
 	@Override
 	public int getJahr() {
-		// TODO Auto-generated method stub
-		return 0;
+		Calendar copy = intern.clone();
+		return copy.get(Calendar.YEAR);
 	}
 
 }
