@@ -35,18 +35,17 @@ public class MonatImpl implements Monat {
 		return new DatumImpl(
 				new TagImpl(copy.get(Calendar.YEAR), copy.get(Calendar.MONTH), copy.get(Calendar.DAY_OF_MONTH)),
 				new UhrzeitImpl(23, 59));
-		return null;
 	}
 
 	@Override
 	public int getMonat() {
-		Calendar copy = intern.clone();
+		Calendar copy = (Calendar) intern.clone();
 		return copy.get(Calendar.MONTH);
 	}
 
 	@Override
 	public int getJahr() {
-		Calendar copy = intern.clone();
+		Calendar copy = (Calendar) intern.clone();
 		return copy.get(Calendar.YEAR);
 	}
 
