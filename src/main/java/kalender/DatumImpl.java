@@ -11,7 +11,6 @@ import kalender.interfaces.Woche;
 
 public class DatumImpl implements Datum {
 
-gi
 	private Calendar intern;
 	
 	public DatumImpl(Tag tag){
