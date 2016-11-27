@@ -68,13 +68,13 @@ public class TagImpl implements Tag {
 
 	@Override
 	public long differenzInTagen(Tag other) {
-		long x = 0;
-		return x;
+		int dayOther = other.get(Calendar.DATE);
+		return (intern.get(Calendar.DATE) - dayOther);
 	}
 
 	@Override
 	public Calendar inBasis() {
 		return null;
 	}
-
+		return intern.clone();
 }
