@@ -83,18 +83,28 @@ public class TerminImpl implements Termin {
 
 		TerminImpl termin = (TerminImpl) o;
 
-		if (!getDatum().equals(termin.getDatum())) return false;
-		if (!getDauer().equals(termin.getDauer())) return false;
-		return getBeschreibung() != null ? getBeschreibung().equals(termin.getBeschreibung()) : termin.getBeschreibung() == null;
+		if (beschreibung != null ? !beschreibung.equals(termin.beschreibung) : termin.beschreibung != null)
+			return false;
+		if (datum != null ? !datum.equals(termin.datum) : termin.datum != null) return false;
+		return dauer != null ? dauer.equals(termin.dauer) : termin.dauer == null;
 
 	}
 
 	@Override
 	public int hashCode() {
-		int result = getDatum().hashCode();
-		result = 31 * result + getDauer().hashCode();
-		result = 31 * result + (getBeschreibung() != null ? getBeschreibung().hashCode() : 0);
+		int result = beschreibung != null ? beschreibung.hashCode() : 0;
+		result = 31 * result + (datum != null ? datum.hashCode() : 0);
+		result = 31 * result + (dauer != null ? dauer.hashCode() : 0);
 		return result;
+	}
+
+	@Override
+	public String toString() {
+		return "TerminImpl{" +
+				"beschreibung='" + beschreibung + '\'' +
+				", datum=" + datum +
+				", dauer=" + dauer +
+				'}';
 	}
 
 }
