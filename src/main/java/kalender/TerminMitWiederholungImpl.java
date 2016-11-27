@@ -112,28 +112,23 @@ public class TerminMitWiederholungImpl extends TerminImpl implements TerminMitWi
 	@Override
 	public IntervallIterator<Datum> intervallIterator(int von, int bis) {
 		return new IntervallIterator<Datum>() {
-			// TODO end Index als upper bound merken / cursor initialisieren
-			private TerminMitWiederholung current = null;
-			private int howManySeen = 0;
+			private int upperBound=bis;
+			private int counter = von;
 
 			@Override
 			public boolean hasNext() {
-					return howManySeen <= wdh.anzahl();
-				// TODO in Abhängigkeit von cursor und upper bound (upper bound ist inkl.)
-			}
+                return counter <=upperBound && counter <= TerminMitWiederholungImpl.this.getWdh().maxIntervallIndex();
+			}   //Checkt einmal ob es unter oder gleich der oberen Grenze ist
+                //und zweitens ob es unter oder gleich dem maximalen Index des Intervalls ist
+                //TerminMitWiederholungImpl ist hierbei die enclosing Class aus der die Wdh geprüft wird.
 
 			@Override
 			public Datum next() {
-				// TODO nächstes Element mit geeigneter Methode von Wiederholung berechnen
-				if (current == null) {
-					current = TerminMitWiederholungImpl.this;
-				} else {
-					current = new TerminMitWiederholungImpl(getBeschreibung(), current.getWdh().naechstesDatum(),
-							getDauer(), current.getWdh().sub(1));
-				}
-				howManySeen += 1;
-				return current;
-			}
+                    return TerminMitWiederholungImpl.this.getWdh().naechstesDatum(counter++);
+				}   //Zugriff auf die Wiederholung der enclosing Class und per
+                    //Methode der Subklasse Wiederholung wird das nächste Datum
+                    //bezogen auf den Counter der das jetzige wiedergibt um eins hoch
+                    //gesetzt. Also auf das Nächste Datum.
 
 		};
 	}
