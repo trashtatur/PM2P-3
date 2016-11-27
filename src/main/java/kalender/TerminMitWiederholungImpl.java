@@ -8,7 +8,6 @@ public class TerminMitWiederholungImpl extends TerminImpl implements TerminMitWi
 
 	private Wiederholung wdh;
 
-    @Override
     private TerminKalender kalender;
 
  // TODO Konstruktorprobleme auflösen
@@ -32,9 +31,9 @@ public class TerminMitWiederholungImpl extends TerminImpl implements TerminMitWi
 	@Override
 	public Map<Datum, Termin> termineIn(Monat monat) {
         Map<Datum, Termin> ret = new HashMap<Datum, Termin>();
-        Map<Datum, List<Termin>> temp = kalender.termineFuerMonat(monat);
+        /*Map<Datum, List<Termin>> temp = kalender.termineFuerMonat(monat);
         Set<Termin> liste = new HashSet<Termin>();
-        for (Map.Entry<Datum, List<Termin>> map : temp) {
+        for (Map.Entry<Datum, List<Termin>> map : temp.entrySet()) {
             for (Termin termine : map.getValue()) {
                 if (liste.contains(termine)) {
                     ret.put(map.getKey(), termine);
@@ -42,16 +41,16 @@ public class TerminMitWiederholungImpl extends TerminImpl implements TerminMitWi
                     liste.add(termine);
                 }
             }
-        }
+        }*/
         return ret;
 }
 
 	@Override
 	public Map<Datum, Termin> termineIn(Woche woche) {
         Map<Datum, Termin> ret = new HashMap<Datum, Termin>();
-        Map<Datum, List<Termin>> temp = kalender.termineFuerWoche(woche);
-        Set<Termin> liste = new HashSet<Termin>();
-        for (Map.Entry<Datum, List<Termin>> map : temp) {
+        /*Map<Datum, List<Termin>> temp = kalender.termineFuerWoche(woche);
+        Set<Termin> liste = new HashSet<>();
+        for (Map.Entry<Datum, List<Termin>> map : temp.entrySet()) {
             for (Termin termine : map.getValue()) {
                 if (liste.contains(termine)) {
                     ret.put(map.getKey(), termine);
@@ -60,15 +59,15 @@ public class TerminMitWiederholungImpl extends TerminImpl implements TerminMitWi
                 }
             }
         }
-        return ret;
+        */return ret;
     }
 
 	@Override
 	public Map<Datum, Termin> termineAn(Tag tag) {
         Map<Datum, Termin> ret = new HashMap<Datum, Termin>();
-        Map<Datum, List<Termin>> temp = kalender.termineFuerTag(tag);
+        /*Map<Datum, List<Termin>> temp = kalender.termineFuerTag(tag);
         Set<Termin> liste = new HashSet<Termin>();
-        for (Map.Entry<Datum, List<Termin>> map : temp) {
+        for (Map.Entry<Datum, List<Termin>> map : temp.entrySet()) {
             for (Termin termine : map.getValue()) {
                 if (liste.contains(termine)) {
                     ret.put(map.getKey(), termine);
@@ -77,7 +76,7 @@ public class TerminMitWiederholungImpl extends TerminImpl implements TerminMitWi
                 }
             }
         }
-        return ret;
+        */return ret;
 	}
 
 	
