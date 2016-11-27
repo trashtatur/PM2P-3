@@ -1,28 +1,21 @@
 package kalender;
 
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
-import kalender.interfaces.Datum;
-import kalender.interfaces.DatumsGroesse;
-import kalender.interfaces.Dauer;
-import kalender.interfaces.IntervallIterator;
-import kalender.interfaces.Monat;
-import kalender.interfaces.Tag;
-import kalender.interfaces.Termin;
-import kalender.interfaces.TerminMitWiederholung;
-import kalender.interfaces.Wiederholung;
-import kalender.interfaces.Woche;
+import kalender.interfaces.*;
 
 public class TerminMitWiederholungImpl extends TerminImpl implements TerminMitWiederholung {
 
 	private Wiederholung wdh;
 
+    @Override
+    private TerminKalender kalender;
+
  // TODO Konstruktorprobleme auflösen
 	public TerminMitWiederholungImpl(String beschreibung, Datum start, Dauer dauer, WiederholungType type, int anzahl,
 			int zyklus) {
         super(beschreibung,start,dauer);
-		this.wdh=new WiederholungImpl(type,anzahl,zyklus);
+		wdh=new WiederholungImpl(type,anzahl,zyklus);
 	}
 
 	public TerminMitWiederholungImpl(String beschreibung, Datum start, Dauer dauer, Wiederholung wdh) {
@@ -38,20 +31,53 @@ public class TerminMitWiederholungImpl extends TerminImpl implements TerminMitWi
 
 	@Override
 	public Map<Datum, Termin> termineIn(Monat monat) {
-		// TODO auf termineFuer zurückführen
-		return null;
-	}
+        Map<Datum, Termin> ret = new HashMap<Datum, Termin>();
+        Map<Datum, List<Termin>> temp = kalender.termineFuerMonat(monat);
+        Set<Termin> liste = new HashSet<Termin>();
+        for (Map.Entry<Datum, List<Termin>> map : temp) {
+            for (Termin termine : map.getValue()) {
+                if (liste.contains(termine)) {
+                    ret.put(map.getKey(), termine);
+                } else {
+                    liste.add(termine);
+                }
+            }
+        }
+        return ret;
+    }
 
 	@Override
 	public Map<Datum, Termin> termineIn(Woche woche) {
-		// TODO auf termineFuer zurückführen
-		return null;
-	}
+        Map<Datum, Termin> ret = new HashMap<Datum, Termin>();
+        Map<Datum, List<Termin>> temp = kalender.termineFuerWoche(woche);
+        Set<Termin> liste = new HashSet<Termin>();
+        for (Map.Entry<Datum, List<Termin>> map : temp) {
+            for (Termin termine : map.getValue()) {
+                if (liste.contains(termine)) {
+                    ret.put(map.getKey(), termine);
+                } else {
+                    liste.add(termine);
+                }
+            }
+        }
+        return ret;
+    }
 
 	@Override
 	public Map<Datum, Termin> termineAn(Tag tag) {
-		// TODO auf termineFuer zurückführen
-		return null;
+        Map<Datum, Termin> ret = new HashMap<Datum, Termin>();
+        Map<Datum, List<Termin>> temp = kalender.termineFuerTag(tag);
+        Set<Termin> liste = new HashSet<Termin>();
+        for (Map.Entry<Datum, List<Termin>> map : temp) {
+            for (Termin termine : map.getValue()) {
+                if (liste.contains(termine)) {
+                    ret.put(map.getKey(), termine);
+                } else {
+                    liste.add(termine);
+                }
+            }
+        }
+        return ret;
 	}
 
 	
