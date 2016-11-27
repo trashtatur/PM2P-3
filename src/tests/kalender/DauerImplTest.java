@@ -4,6 +4,8 @@ import kalender.interfaces.Dauer;
 import org.junit.Before;
 import org.junit.Test;
 
+import static junit.framework.TestCase.assertEquals;
+
 /**
  * Created by andi on 24.11.16.
  */
