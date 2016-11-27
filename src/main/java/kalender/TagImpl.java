@@ -68,8 +68,8 @@ public class TagImpl implements Tag {
 
 	@Override
 	public long differenzInTagen(Tag other) {
-		int dayOther = other.get(Calendar.DATE);
-		return (intern.get(Calendar.DATE) - dayOther);
+		int dayOther = other.getTagImJahr() + other.getJahr() * 365;		//Get day of year to substract from
+		return Math.abs(dayOther - (getTagImJahr()+ (getJahr() * 365)));
 	}
 
 	@Override

@@ -1,7 +1,5 @@
 package kalender;
 
-import java.util.Calendar;
-
 import kalender.interfaces.Datum;
 import kalender.interfaces.Dauer;
 import kalender.interfaces.Monat;
