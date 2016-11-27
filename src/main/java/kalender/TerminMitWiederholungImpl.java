@@ -44,7 +44,7 @@ public class TerminMitWiederholungImpl extends TerminImpl implements TerminMitWi
             }
         }
         return ret;
-    }
+}
 
 	@Override
 	public Map<Datum, Termin> termineIn(Woche woche) {
@@ -114,17 +114,26 @@ public class TerminMitWiederholungImpl extends TerminImpl implements TerminMitWi
 	public IntervallIterator<Datum> intervallIterator(int von, int bis) {
 		return new IntervallIterator<Datum>() {
 			// TODO end Index als upper bound merken / cursor initialisieren
-			
+			private TerminMitWiederholung current = null;
+			private int howManySeen = 0;
+
 			@Override
 			public boolean hasNext() {
+					return howManySeen <= wdh.anzahl();
 				// TODO in Abhängigkeit von cursor und upper bound (upper bound ist inkl.)
-				return false;
 			}
 
 			@Override
 			public Datum next() {
 				// TODO nächstes Element mit geeigneter Methode von Wiederholung berechnen
-				return null;
+				if (current == null) {
+					current = TerminMitWiederholungImpl.this;
+				} else {
+					current = new TerminMitWiederholungImpl(getBeschreibung(), current.getWdh().naechstesDatum(),
+							getDauer(), current.getWdh().sub(1));
+				}
+				howManySeen += 1;
+				return current;
 			}
 
 		};
