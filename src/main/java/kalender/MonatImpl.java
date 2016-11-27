@@ -49,4 +49,20 @@ public class MonatImpl implements Monat {
 		return copy.get(Calendar.YEAR);
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		MonatImpl monat = (MonatImpl) o;
+
+		return intern != null ? intern.equals(monat.intern) : monat.intern == null;
+
+	}
+
+	@Override
+	public int hashCode() {
+		return intern != null ? intern.hashCode() : 0;
+	}
+
 }

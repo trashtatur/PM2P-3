@@ -53,7 +53,7 @@ public class TerminKalenderImpl implements TerminKalender {
         return terminelist
                .stream()
                .collect(Collectors
-                       .toMap(Termin::getDatum,   //NNNNGGHHHHH!!! >.<
+                       .toMap(termin -> termin.termineAn(tag).keySet().iterator().next(),   //NNNNGGHHHHH!!! >.<
                               termin ->(termin.termineAn(tag).values())
                                         .stream()                       //Stream für Collector Umwandlung zu Liste
                                         .collect(Collectors.toList())   //Umwandlung nötig wegn Typkompatibilität

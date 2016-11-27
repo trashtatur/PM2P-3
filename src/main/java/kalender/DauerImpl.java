@@ -9,77 +9,100 @@ import kalender.interfaces.Woche;
 
 public class DauerImpl implements Dauer {
 
-	private int minuten;
-	
-	public DauerImpl(Datum d1, Datum d2) {
-		this(d1.abstand(d2).inMinuten());
-	}
+    private int minuten;
 
-	public DauerImpl(int minuten) {
-		this.minuten=minuten;
-	}
-	
-	public DauerImpl(int stunden, int minuten) {
-		this((stunden*60)+minuten);
-	}
+    public DauerImpl(Datum d1, Datum d2) {
+        this(d1.abstand(d2).inMinuten());
+    }
 
-	public DauerImpl(int tage, int stunden, int minuten) {
-		this((tage*24*60)+(stunden*60)+minuten);
-	}
+    public DauerImpl(int minuten) {
+        this.minuten = minuten;
+    }
 
-	@Override
-	public int compareTo(Dauer o) {
-		return this.inMinuten()-o.inMinuten();
-	}
+    public DauerImpl(int stunden, int minuten) {
+        this((stunden * 60) + minuten);
+    }
 
-	@Override
-	public int inMinuten() {
+    public DauerImpl(int tage, int stunden, int minuten) {
+        this((tage * 24 * 60) + (stunden * 60) + minuten);
+    }
+
+    @Override
+    public int compareTo(Dauer o) {
+        return this.inMinuten() - o.inMinuten();
+    }
+
+    @Override
+    public int inMinuten() {
 
         return minuten;
-	}
+    }
 
-	@Override
-	public int inStunden() {
+    @Override
+    public int inStunden() {
 
-		return this.inMinuten()/60;
-	}
+        return this.inMinuten() / 60;
+    }
 
-	@Override
-	public int inTagen() {
+    @Override
+    public int inTagen() {
 
-		return this.inStunden()/24;
-	}
+        return this.inStunden() / 24;
+    }
 
-	@Override
-	public int inWochen() {
+    @Override
+    public int inWochen() {
 
-		return this.inTagen()/7;
-	}
+        return this.inTagen() / 7;
+    }
 
-	@Override
-	public int anteilMinuten() {
+    @Override
+    public int anteilMinuten() {
 
-		return (minuten-this.anteilWochen()-this.anteilTage()-this.anteilStunden());
+        return (minuten - this.anteilWochen() - this.anteilTage() - this.anteilStunden());
 
-	}
+    }
 
-	@Override
-	public int anteilStunden() {
+    @Override
+    public int anteilStunden() {
 
-		return (minuten-this.anteilWochen()-this.anteilTage())-
-				(minuten-this.anteilWochen()-this.anteilTage())%60;
-	}
+        return (minuten - this.anteilWochen() - this.anteilTage()) -
+                (minuten - this.anteilWochen() - this.anteilTage()) % 60;
+    }
 
-	@Override
-	public int anteilTage() {
+    @Override
+    public int anteilTage() {
 
-		return minuten-this.anteilWochen()-(minuten-this.anteilWochen())%1440;
-	}
+        return minuten - this.anteilWochen() - (minuten - this.anteilWochen()) % 1440;
+    }
 
-	@Override
-	public int anteilWochen() {
+    @Override
+    public int anteilWochen() {
 
-		return minuten-(minuten%10080);
-	}
+        return minuten - (minuten % 10080);
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        DauerImpl dauer = (DauerImpl) o;
+
+        return minuten == dauer.minuten;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return minuten;
+    }
+
+    @Override
+    public String toString() {
+        return "DauerImpl{" +
+                "minuten=" + minuten +
+                '}';
+
+    }
 }
