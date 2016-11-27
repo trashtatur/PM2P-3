@@ -32,6 +32,7 @@ public class DatumImpl implements Datum {
 	}
 
 	private DatumImpl(Calendar intern) {
+
 		this.intern=intern;
 	}
 	
@@ -142,4 +143,19 @@ public class DatumImpl implements Datum {
         return (Calendar) intern.clone();
 	}
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        DatumImpl datum = (DatumImpl) o;
+
+        return intern.equals(datum.intern);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return intern.hashCode();
+    }
 }
