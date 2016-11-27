@@ -50,10 +50,17 @@ public class TerminKalenderImpl implements TerminKalender {
 
 	@Override
 	public Map<Datum, List<Termin>> termineFuerTag(Tag tag) {
-        return terminelist.stream()
-                .flatMap(termin -> termin.termineAn(tag).values()
-                .stream())
-                .collect(Collectors.groupingBy(Termin::getDatum));
+        return terminelist
+               .stream()
+               .collect(Collectors
+                       .toMap(Termin::getDatum,   //NNNNGGHHHHH!!! >.<
+                              termin ->(termin.termineAn(tag).values())
+                                        .stream()                       //Stream für Collector Umwandlung zu Liste
+                                        .collect(Collectors.toList())   //Umwandlung nötig wegn Typkompatibilität
+               ));
+
+
+
 
     }
 
