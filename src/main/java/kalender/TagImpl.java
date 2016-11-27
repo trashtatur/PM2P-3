@@ -74,7 +74,7 @@ public class TagImpl implements Tag {
 
 	@Override
 	public Calendar inBasis() {
-		return null;
+		Calendar copy = (Calendar) intern.clone();
+		return copy;
 	}
-		return intern.clone();
 }
