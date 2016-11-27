@@ -150,12 +150,17 @@ public class DatumImpl implements Datum {
 
         DatumImpl datum = (DatumImpl) o;
 
-        return intern.equals(datum.intern);
+        return intern != null ? intern.equals(datum.intern) : datum.intern == null;
 
     }
 
     @Override
     public int hashCode() {
-        return intern.hashCode();
+        return intern != null ? intern.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Datum{"+getTagImMonat()+"."+(getMonatImJahr()+1)+"."+getJahr()+" "+getUhrzeit().getStunde()+":"+getUhrzeit().getMinuten()+"}";
     }
 }

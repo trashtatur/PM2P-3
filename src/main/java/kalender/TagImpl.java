@@ -77,4 +77,20 @@ public class TagImpl implements Tag {
 		Calendar copy = (Calendar) intern.clone();
 		return copy;
 	}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        TagImpl tag = (TagImpl) o;
+
+        return intern != null ? intern.equals(tag.intern) : tag.intern == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return intern != null ? intern.hashCode() : 0;
+    }
 }
