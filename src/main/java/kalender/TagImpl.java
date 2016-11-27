@@ -53,7 +53,7 @@ public class TagImpl implements Tag {
 
 	@Override
 	public int getMonat() {
-		return intern.get(Calendar.MONTH)
+		return intern.get(Calendar.MONTH);
 	}
 
 	@Override
@@ -68,12 +68,13 @@ public class TagImpl implements Tag {
 
 	@Override
 	public long differenzInTagen(Tag other) {
-		return null;
+		long x = 0;
+		return x;
 	}
 
 	@Override
 	public Calendar inBasis() {
-		return null
+		return null;
 	}
 
 }
