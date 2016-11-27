@@ -53,7 +53,7 @@ public class TagImpl implements Tag {
 
 	@Override
 	public int getMonat() {
-		return intern.get(Calendar.MONTH)
+		return intern.get(Calendar.MONTH);
 	}
 
 	@Override
@@ -68,12 +68,13 @@ public class TagImpl implements Tag {
 
 	@Override
 	public long differenzInTagen(Tag other) {
-		return null;
+		int dayOther = other.getTagImJahr() + other.getJahr() * 365;		//Get day of year to substract from
+		return Math.abs(dayOther - (getTagImJahr()+ (getJahr() * 365)));
 	}
 
 	@Override
 	public Calendar inBasis() {
-		return null
+		Calendar copy = (Calendar) intern.clone();
+		return copy;
 	}
-
 }
