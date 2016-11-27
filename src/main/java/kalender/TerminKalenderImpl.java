@@ -1,7 +1,11 @@
 package kalender;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import kalender.interfaces.Datum;
 import kalender.interfaces.Monat;
@@ -12,45 +16,61 @@ import kalender.interfaces.Woche;
 
 public class TerminKalenderImpl implements TerminKalender {
 
+    private  List<Termin> terminelist;
+
+    public TerminKalenderImpl() {
+        this.terminelist=new ArrayList<>();
+    }
+
+
 	@Override
 	public boolean eintragen(Termin termin) {
-		// TODO Auto-generated method stub
-		return false;
+		if (this.enthaeltTermin(termin)) {
+            return false;
+        }
+        terminelist.add(termin);
+        return true;
 	}
 
 	@Override
 	public void verschiebenAuf(Termin termin, Datum datum) {
-		termin.verschiebeAuf(datum);
-	}
+        terminelist.set(terminelist.indexOf(termin),
+        new TerminImpl(termin.getBeschreibung(),datum,termin.getDauer()));
+    }
 
 	@Override
 	public boolean terminLoeschen(Termin termin) {
-		termin.verschiebeAuf(null);
-		return true;
+		return terminelist.removeIf(termindelete -> equals(termin));
 	}
 
 	@Override
 	public boolean enthaeltTermin(Termin termin) {
-		// TODO Auto-generated method stub
-		return false;
+		return terminelist.stream().anyMatch(terminsearched -> equals(termin));
 	}
 
 	@Override
 	public Map<Datum, List<Termin>> termineFuerTag(Tag tag) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+        return terminelist.stream()
+                .flatMap(termin -> termin.termineAn(tag).values()
+                .stream())
+                .collect(Collectors.groupingBy(Termin::getDatum));
+
+    }
 
 	@Override
 	public Map<Datum, List<Termin>> termineFuerWoche(Woche woche) {
-		// TODO Auto-generated method stub
-		return null;
+        return terminelist.stream()
+                .flatMap(termin -> termin.termineIn(woche).values()
+                .stream())
+                .collect(Collectors.groupingBy(Termin::getDatum));
 	}
 
 	@Override
 	public Map<Datum, List<Termin>> termineFuerMonat(Monat monat) {
-		// TODO Auto-generated method stub
-		return null;
+        return terminelist.stream()
+                .flatMap(termin -> termin.termineIn(monat).values()
+                .stream())
+                .collect(Collectors.groupingBy(Termin::getDatum));
 	}
 
 }
