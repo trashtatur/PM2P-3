@@ -22,7 +22,7 @@ public class DatumImpl implements Datum {
 	}
 	public DatumImpl(Tag tag, Uhrzeit uhrzeit ) {
 		this(tag);
-		intern.set(Calendar.HOUR,uhrzeit.getStunde());
+		intern.set(Calendar.HOUR_OF_DAY,uhrzeit.getStunde());
 		intern.set(Calendar.MINUTE,uhrzeit.getMinuten());
 	}
 
@@ -40,7 +40,7 @@ public class DatumImpl implements Datum {
 	@Override
 	public int compareTo(Datum o) {
 
-		return this.inMinuten()-o.inMinuten();
+		return this.abstand(o).inMinuten();
 	}
 
 	@Override
@@ -66,7 +66,7 @@ public class DatumImpl implements Datum {
 
 	@Override
 	public Uhrzeit getUhrzeit() {
-		return new UhrzeitImpl(intern.get(Calendar.HOUR),
+		return new UhrzeitImpl(intern.get(Calendar.HOUR_OF_DAY),
 				               intern.get(Calendar.MINUTE));
 	}
 
@@ -121,8 +121,7 @@ public class DatumImpl implements Datum {
 	@Override
 	public Dauer abstand(Datum d) {
 
-		return new DauerImpl(this.compareTo(d));
-
+		return new DauerImpl(this.inMinuten()-d.inMinuten());
 	}
 
 	@Override
@@ -156,7 +155,8 @@ public class DatumImpl implements Datum {
 
     @Override
     public int hashCode() {
-        return intern != null ? intern.hashCode() : 0;
+
+		return intern != null ? intern.hashCode() : 0;
     }
 
     @Override

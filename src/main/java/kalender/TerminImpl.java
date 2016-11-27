@@ -52,7 +52,7 @@ public class TerminImpl implements Termin {
 	@Override
 	public Map<Datum, Termin> termineIn(Monat monat) {
 		Map<Datum,Termin> termineInMap=new HashMap<Datum,Termin>();
-		if (this.getDatum().getMonatImJahr() == monat.getMonat()) {
+		if (datum.getMonat().equals(monat)) {
             termineInMap.put(this.datum,this);
         }
         return termineInMap;
@@ -61,7 +61,7 @@ public class TerminImpl implements Termin {
 	@Override
 	public Map<Datum, Termin> termineIn(Woche woche) {
         Map<Datum,Termin> termineInMap=new HashMap<Datum,Termin>();
-        if (this.getDatum().getWoche().getWocheImMonat() == woche.getWocheImMonat()) {
+        if (datum.getWoche().equals(woche)) {
             termineInMap.put(this.datum,this);
         }
         return termineInMap;
@@ -70,7 +70,7 @@ public class TerminImpl implements Termin {
 	@Override
 	public Map<Datum, Termin> termineAn(Tag tag) {
         Map<Datum,Termin> termineInMap=new HashMap<Datum,Termin>();
-        if (this.getDatum().getTag().getTagImMonat() == tag.getTagImMonat()) {
+        if (datum.getTag().equals(tag)) {
             termineInMap.put(this.datum,this);
         }
         return termineInMap;

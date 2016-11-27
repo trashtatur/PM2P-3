@@ -11,11 +11,16 @@ public class TagImpl implements Tag {
 	
 	public TagImpl(int jahr, int tagImJahr) {
 		intern = Calendar.getInstance();
-		intern.set(jahr,tagImJahr);
+		intern.clear();
+		intern.set(Calendar.YEAR,jahr);
+		intern.set(Calendar.DAY_OF_YEAR,tagImJahr);
 	}
 	public TagImpl(int jahr, int monat, int tagImMonat) {
 		intern = Calendar.getInstance();
-		intern.set(jahr,monat,tagImMonat);
+		intern.clear();
+		intern.set(Calendar.YEAR,jahr);
+		intern.set(Calendar.MONTH,monat);
+		intern.set(Calendar.DAY_OF_MONTH,tagImMonat);
 	}
 	
 	public TagImpl(Tag tag) {
@@ -26,7 +31,7 @@ public class TagImpl implements Tag {
 	@Override
 	public Datum getStart() {
 		Calendar copy = (Calendar) intern.clone();
-		copy.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+		copy.set(Calendar.HOUR_OF_DAY, 0);
 		return new DatumImpl(
 				new TagImpl(copy.get(Calendar.YEAR), copy.get(Calendar.MONTH), copy.get(Calendar.DAY_OF_MONTH)));
 	}
@@ -34,7 +39,8 @@ public class TagImpl implements Tag {
 	@Override
 	public Datum getEnde() {
 		Calendar copy = (Calendar) intern.clone();
-		copy.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+		copy.set(Calendar.HOUR_OF_DAY, copy.getActualMaximum(Calendar.HOUR_OF_DAY));
+		copy.set(Calendar.MINUTE, copy.getActualMaximum(Calendar.MINUTE));
 		return new DatumImpl(
 				new TagImpl(copy.get(Calendar.YEAR), copy.get(Calendar.MONTH), copy.get(Calendar.DAY_OF_MONTH)),
 				new UhrzeitImpl(23, 59));
@@ -42,34 +48,37 @@ public class TagImpl implements Tag {
 
 	@Override
 	public int compareTo(Tag o) {
-		// TODO Auto-generated method stub
-		return 0;
+		return (int) this.differenzInTagen(o);
 	}
 
 	@Override
 	public int getJahr() {
+
 		return intern.get(Calendar.YEAR);
 	}
 
 	@Override
 	public int getMonat() {
+
 		return intern.get(Calendar.MONTH);
+
 	}
 
 	@Override
 	public int getTagImJahr() {
+
 		return intern.get(Calendar.DAY_OF_YEAR);
 	}
 
 	@Override
 	public int getTagImMonat() {
+
 		return intern.get(Calendar.DAY_OF_MONTH);
 	}
 
 	@Override
 	public long differenzInTagen(Tag other) {
-		int dayOther = other.getTagImJahr() + other.getJahr() * 365;		//Get day of year to substract from
-		return Math.abs(dayOther - (getTagImJahr()+ (getJahr() * 365)));
+		return (long) ((intern.getTimeInMillis() - other.inBasis().getTimeInMillis()) * 0.001 / 60 / 60 / 24);
 	}
 
 	@Override

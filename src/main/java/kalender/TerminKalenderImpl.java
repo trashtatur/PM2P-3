@@ -34,34 +34,26 @@ public class TerminKalenderImpl implements TerminKalender {
 
 	@Override
 	public void verschiebenAuf(Termin termin, Datum datum) {
-        terminelist.set(terminelist.indexOf(termin),
-        new TerminImpl(termin.getBeschreibung(),datum,termin.getDauer()));
+        terminelist.get(terminelist.indexOf(termin)).verschiebeAuf(datum);
     }
 
 	@Override
 	public boolean terminLoeschen(Termin termin) {
-		return terminelist.removeIf(termindelete -> equals(termin));
+
+        return terminelist.removeIf(termindelete -> termindelete.equals(termin));
 	}
 
 	@Override
 	public boolean enthaeltTermin(Termin termin) {
-		return terminelist.stream().anyMatch(terminsearched -> equals(termin));
+		return terminelist.stream().anyMatch(terminsearched -> terminsearched.equals(termin));
 	}
 
 	@Override
 	public Map<Datum, List<Termin>> termineFuerTag(Tag tag) {
         return terminelist
                .stream()
-               .collect(Collectors
-                       .toMap(termin -> termin.termineAn(tag).keySet().iterator().next(),   //NNNNGGHHHHH!!! >.<
-                              termin ->(termin.termineAn(tag).values())
-                                        .stream()                       //Stream für Collector Umwandlung zu Liste
-                                        .collect(Collectors.toList())   //Umwandlung nötig wegn Typkompatibilität
-               ));
-
-
-
-
+               .flatMap(termin -> termin.termineAn(tag).values().stream())
+				.collect(Collectors.groupingBy(Termin::getDatum));
     }
 
 	@Override
