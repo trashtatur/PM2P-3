@@ -1,11 +1,8 @@
 package kalender;
 
-import kalender.DauerImpl;
 import kalender.interfaces.Dauer;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by andi on 24.11.16.
