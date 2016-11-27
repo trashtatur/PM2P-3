@@ -20,14 +20,13 @@ public class TerminKalenderImpl implements TerminKalender {
 
 	@Override
 	public void verschiebenAuf(Termin termin, Datum datum) {
-		// TODO Auto-generated method stub
-
+		termin.verschiebeAuf(datum);
 	}
 
 	@Override
 	public boolean terminLoeschen(Termin termin) {
-		// TODO Auto-generated method stub
-		return false;
+		termin.verschiebeAuf(null);
+		return true;
 	}
 
 	@Override
