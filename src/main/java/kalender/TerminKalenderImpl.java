@@ -66,18 +66,26 @@ public class TerminKalenderImpl implements TerminKalender {
 
 	@Override
 	public Map<Datum, List<Termin>> termineFuerWoche(Woche woche) {
-        return terminelist.stream()
-                .flatMap(termin -> termin.termineIn(woche).values()
-                .stream())
-                .collect(Collectors.groupingBy(Termin::getDatum));
+        return terminelist
+                .stream()
+                .collect(Collectors
+                        .toMap(Termin::getDatum,   //NNNNGGHHHHH!!! >.<
+                                termin ->(termin.termineIn(woche).values())
+                                        .stream()                       //Stream für Collector Umwandlung zu Liste
+                                        .collect(Collectors.toList())   //Umwandlung nötig wegn Typkompatibilität
+                        ));
 	}
 
 	@Override
 	public Map<Datum, List<Termin>> termineFuerMonat(Monat monat) {
-        return terminelist.stream()
-                .flatMap(termin -> termin.termineIn(monat).values()
-                .stream())
-                .collect(Collectors.groupingBy(Termin::getDatum));
+        return terminelist
+                .stream()
+                .collect(Collectors
+                        .toMap(Termin::getDatum,   //NNNNGGHHHHH!!! >.<
+                                termin ->(termin.termineIn(monat).values())
+                                        .stream()                       //Stream für Collector Umwandlung zu Liste
+                                        .collect(Collectors.toList())   //Umwandlung nötig wegn Typkompatibilität
+                        ));
 	}
 
 }
