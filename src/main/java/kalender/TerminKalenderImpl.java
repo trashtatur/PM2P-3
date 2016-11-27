@@ -19,7 +19,7 @@ public class TerminKalenderImpl implements TerminKalender {
     private  List<Termin> terminelist;
 
     public TerminKalenderImpl() {
-        this.terminelist=new ArrayList<>();
+        this.terminelist = new ArrayList<Termin>();
     }
 
 
