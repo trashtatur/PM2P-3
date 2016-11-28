@@ -79,6 +79,25 @@ public class TerminMitWiederholungImpl extends TerminImpl implements TerminMitWi
         */return ret;
 	}
 
+    @Override
+    public Map<Datum, Termin> termineFuer(DatumsGroesse groesse) {
+        // TODO Indizes fuer Start und End Intervall berechnen
+
+        // TODO Indizes auf Gültigkeit prüfen
+        // wenn endIndex > maxIntervallIndex dann setze endIndex auf
+        // maxIntervallIndex
+        //
+        // wenn endIndex < startIndex || endIndex < 0 || startIndex < 0 ||
+        // endIndex > maxIntervallIndex
+        // gib null zurück
+
+        //
+        // TODO hier den Intervalliterator nutzen
+        // Map erzeugen und die Wiederholungen einsammeln
+
+        return null;
+    }
+
 	
 	/**
 	 * Beispiel für den naiven Iterator, der alle Wiederholungen explizit aufzaehlt
@@ -124,6 +143,7 @@ public class TerminMitWiederholungImpl extends TerminImpl implements TerminMitWi
 
 			@Override
 			public Datum next() {
+
                     return TerminMitWiederholungImpl.this.getWdh().naechstesDatum(counter++);
 				}   //Zugriff auf die Wiederholung der enclosing Class und per
                     //Methode der Subklasse Wiederholung wird das nächste Datum
@@ -133,25 +153,32 @@ public class TerminMitWiederholungImpl extends TerminImpl implements TerminMitWi
 		};
 	}
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
 
-	@Override
-	public Map<Datum, Termin> termineFuer(DatumsGroesse groesse) {
-		// TODO Indizes fuer Start und End Intervall berechnen
-		
-		// TODO Indizes auf Gültigkeit prüfen
-		// wenn endIndex > maxIntervallIndex dann setze endIndex auf
-		// maxIntervallIndex
-		//
-		// wenn endIndex < startIndex || endIndex < 0 || startIndex < 0 ||
-		// endIndex > maxIntervallIndex
-		// gib null zurück
+        TerminMitWiederholungImpl other = (TerminMitWiederholungImpl) o;
 
-		// 
-		// TODO hier den Intervalliterator nutzen 
-		// Map erzeugen und die Wiederholungen einsammeln
-		
-		return null;
-	}
+        return wdh != null ? wdh.equals(other.wdh) : other.wdh == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (wdh != null ? wdh.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "TerminMitWiederholung{"+super.toString()+"," +
+                "wdh=" + wdh +
+                '}';
+    }
+
 
 	public class WiederholungImpl implements Wiederholung {
 
