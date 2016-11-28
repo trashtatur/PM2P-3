@@ -102,10 +102,15 @@ public class TerminMitWiederholungImpl extends TerminImpl implements TerminMitWi
         Map <Datum,Termin> returnmap=new HashMap<>();
         IntervallIterator<Datum> iterator = intervallIterator(startindex,endindex);
         while(iterator.hasNext()) {
-
+            Datum anotherOne=iterator.next();
+            returnmap.put(anotherOne
+                          ,new TerminMitWiederholungImpl(this.getBeschreibung()
+                                                         ,anotherOne
+                                                         ,this.getDauer()
+                                                         ,this.getWdh().sub(1)));
         }
 
-        return null;
+        return returnmap;
     }
 
 	
