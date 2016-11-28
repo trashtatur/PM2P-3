@@ -11,6 +11,9 @@ public class WocheImpl implements Woche {
 	private Calendar intern;
 
 	public WocheImpl(int jahr, int monat, int wocheImMonat) {
+		if (jahr<0||monat>12||monat<0||wocheImMonat<0) {
+            throw new IllegalArgumentException("Uebergeben Argumente sind außerhalb gueltiger Bereiche");
+        }
 		intern = Calendar.getInstance();
 		intern.clear();
 		intern.set(Calendar.YEAR, jahr);
