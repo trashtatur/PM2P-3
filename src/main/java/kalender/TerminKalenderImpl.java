@@ -53,31 +53,34 @@ public class TerminKalenderImpl implements TerminKalender {
         return terminelist
                .stream()
                .flatMap(termin -> termin.termineAn(tag).values().stream())
-				.collect(Collectors.groupingBy(Termin::getDatum));
+			   .collect(Collectors.groupingBy(Termin::getDatum));
     }
 
 	@Override
 	public Map<Datum, List<Termin>> termineFuerWoche(Woche woche) {
         return terminelist
                 .stream()
-                .collect(Collectors
-                        .toMap(Termin::getDatum,   //NNNNGGHHHHH!!! >.<
-                                termin ->(termin.termineIn(woche).values())
-                                        .stream()                       //Stream für Collector Umwandlung zu Liste
-                                        .collect(Collectors.toList())   //Umwandlung nötig wegn Typkompatibilität
-                        ));
+                .flatMap(termin -> termin.termineIn(woche).values().stream())
+                .collect(Collectors.groupingBy(Termin::getDatum));
 	}
 
 	@Override
 	public Map<Datum, List<Termin>> termineFuerMonat(Monat monat) {
-        return terminelist
+       /* return terminelist
                 .stream()
                 .collect(Collectors
-                        .toMap(Termin::getDatum,   //NNNNGGHHHHH!!! >.<
-                                termin ->(termin.termineIn(monat).values())
-                                        .stream()                       //Stream für Collector Umwandlung zu Liste
-                                        .collect(Collectors.toList())   //Umwandlung nötig wegn Typkompatibilität
-                        ));
+                        .toMap(Termin::getDatum,   //NNNNGGHHHHH!!! >.<  oder: termin.termineIn(monat).keySet.iterator.next(),
+                               termin ->(termin.termineIn(monat).values())
+                                        .stream()
+                                        .collect(Collectors.toList())
+                       ));
+
+                       Wüsste gerne warum diese Version nicht funktioniert :( ist mir nicht ganz klar.
+      */
+        return terminelist
+                .stream()
+                .flatMap(termin -> termin.termineIn(monat).values().stream())
+                .collect(Collectors.groupingBy(Termin::getDatum));
 	}
 
 }
