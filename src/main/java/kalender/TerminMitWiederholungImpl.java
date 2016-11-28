@@ -32,7 +32,7 @@ public class TerminMitWiederholungImpl extends TerminImpl implements TerminMitWi
 	@Override
 	public Map<Datum, Termin> termineIn(Monat monat) {
         Map<Datum, Termin> ret = new HashMap<Datum, Termin>();
-        /*Map<Datum, List<Termin>> temp = kalender.termineFuerMonat(monat);
+        Map<Datum, List<Termin>> temp = kalender.termineFuerMonat(monat);
         Set<Termin> liste = new HashSet<Termin>();
         for (Map.Entry<Datum, List<Termin>> map : temp.entrySet()) {
             for (Termin termine : map.getValue()) {
@@ -42,31 +42,14 @@ public class TerminMitWiederholungImpl extends TerminImpl implements TerminMitWi
                     liste.add(termine);
                 }
             }
-        }*/
+        }
         return ret;
 }
 
 	@Override
 	public Map<Datum, Termin> termineIn(Woche woche) {
         Map<Datum, Termin> ret = new HashMap<Datum, Termin>();
-        /*Map<Datum, List<Termin>> temp = kalender.termineFuerWoche(woche);
-        Set<Termin> liste = new HashSet<>();
-        for (Map.Entry<Datum, List<Termin>> map : temp.entrySet()) {
-            for (Termin termine : map.getValue()) {
-                if (liste.contains(termine)) {
-                    ret.put(map.getKey(), termine);
-                } else {
-                    liste.add(termine);
-                }
-            }
-        }
-        */return ret;
-    }
-
-	@Override
-	public Map<Datum, Termin> termineAn(Tag tag) {
-        Map<Datum, Termin> ret = new HashMap<Datum, Termin>();
-        /*Map<Datum, List<Termin>> temp = kalender.termineFuerTag(tag);
+        Map<Datum, List<Termin>> temp = kalender.termineFuerWoche(woche);
         Set<Termin> liste = new HashSet<Termin>();
         for (Map.Entry<Datum, List<Termin>> map : temp.entrySet()) {
             for (Termin termine : map.getValue()) {
@@ -77,7 +60,25 @@ public class TerminMitWiederholungImpl extends TerminImpl implements TerminMitWi
                 }
             }
         }
-        */return ret;
+        return ret;
+    }
+
+	@Override
+	public Map<Datum, Termin> termineAn(Tag tag) {
+        Map<Datum, Termin> ret = new HashMap<Datum, Termin>();
+
+        Map<Datum, List<Termin>> temp = kalender.termineFuerTag(tag);
+        Set<Termin> liste = new HashSet<Termin>();
+        for (Map.Entry<Datum, List<Termin>> map : temp.entrySet()) {
+            for (Termin termine : map.getValue()) {
+                if (liste.contains(termine)) {
+                    ret.put(map.getKey(), termine);
+                } else {
+                    liste.add(termine);
+                }
+            }
+        }
+        return ret;
 	}
 
     @Override
@@ -99,7 +100,7 @@ public class TerminMitWiederholungImpl extends TerminImpl implements TerminMitWi
         }
         // TODO hier den Intervalliterator nutzen
         // Map erzeugen und die Wiederholungen einsammeln
-        Map <Datum,Termin> returnmap=new HashMap<>();
+        Map <Datum,Termin> returnmap=new HashMap<Datum,Termin>();
         IntervallIterator<Datum> iterator = intervallIterator(startindex,endindex);
         while(iterator.hasNext()) {
             Datum anotherOne=iterator.next();
