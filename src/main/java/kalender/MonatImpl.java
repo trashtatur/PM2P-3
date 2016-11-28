@@ -14,6 +14,7 @@ public class MonatImpl implements Monat {
 	private Calendar intern;
 
 	public MonatImpl(int jahr, int monat) {
+		if (jahr<0||monat<0) throw new IllegalArgumentException("Uebergeben Argumente fuer Monat nicht korrekt");
 		intern=Calendar.getInstance();
         intern.clear();
         intern.set(Calendar.YEAR, jahr);

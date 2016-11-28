@@ -16,6 +16,7 @@ public class DauerImpl implements Dauer {
     }
 
     public DauerImpl(int minuten) {
+        if (minuten<0) throw new IllegalArgumentException("Uebergebene Argumente duerfen nicht kleiner 0 sein");
         this.minuten = minuten;
     }
 
@@ -24,6 +25,7 @@ public class DauerImpl implements Dauer {
     }
 
     public DauerImpl(int tage, int stunden, int minuten) {
+
         this((tage * 24 * 60) + (stunden * 60) + minuten);
     }
 
