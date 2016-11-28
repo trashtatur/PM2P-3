@@ -24,7 +24,8 @@ public class TerminMitWiederholungImpl extends TerminImpl implements TerminMitWi
 
 
 	public Wiederholung getWdh() {
-		return new WiederholungImpl(wdh);
+
+        return new WiederholungImpl(wdh);
 	}
 
 
@@ -293,15 +294,47 @@ public class TerminMitWiederholungImpl extends TerminImpl implements TerminMitWi
 		 */
 		@Override
 		public Wiederholung sub(int wdhCount) {
-			return new WiederholungImpl(wdhType, anzahl - wdhCount, cycle);
+
+            return new WiederholungImpl(wdhType, anzahl - wdhCount, cycle);
 		}
 		/*
 		 * @see kalender.interfaces.Wiederholung#add(int)
 		 */
 		@Override
 		public Wiederholung add(int wdhCount) {
-			return new WiederholungImpl(wdhType, anzahl + wdhCount, cycle);
+
+            return new WiederholungImpl(wdhType, anzahl + wdhCount, cycle);
 		}
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            WiederholungImpl that = (WiederholungImpl) o;
+
+            if (anzahl != that.anzahl) return false;
+            if (cycle != that.cycle) return false;
+            return wdhType == that.wdhType;
+
+        }
+
+        @Override
+        public int hashCode() {
+            int result = wdhType != null ? wdhType.hashCode() : 0;
+            result = 31 * result + anzahl;
+            result = 31 * result + cycle;
+            return result;
+        }
+
+        @Override
+        public String toString() {
+            return "WiederholungImpl{" +
+                    "wdhType=" + wdhType +
+                    ", anzahl=" + anzahl +
+                    ", cycle=" + cycle +
+                    '}';
+        }
 
 
 	}
