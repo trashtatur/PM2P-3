@@ -10,12 +10,14 @@ public class TagImpl implements Tag {
 	private Calendar intern; 
 	
 	public TagImpl(int jahr, int tagImJahr) {
+		if (jahr<0||tagImJahr<0) throw new IllegalArgumentException("Uebergebe Argumente fuer Tag nicht korrekt");
 		intern = Calendar.getInstance();
 		intern.clear();
 		intern.set(Calendar.YEAR,jahr);
 		intern.set(Calendar.DAY_OF_YEAR,tagImJahr);
 	}
 	public TagImpl(int jahr, int monat, int tagImMonat) {
+        if (jahr<0||tagImMonat<0) throw new IllegalArgumentException("Uebergebe Argumente fuer Tag nicht korrekt");
 		intern = Calendar.getInstance();
 		intern.clear();
 		intern.set(Calendar.YEAR,jahr);
