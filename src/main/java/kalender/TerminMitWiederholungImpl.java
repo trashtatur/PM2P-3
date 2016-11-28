@@ -83,18 +83,27 @@ public class TerminMitWiederholungImpl extends TerminImpl implements TerminMitWi
     @Override
     public Map<Datum, Termin> termineFuer(DatumsGroesse groesse) {
         // TODO Indizes fuer Start und End Intervall berechnen
-
+		int startindex=this.getWdh().naechstesIntervall(groesse.getStart());
+		int endindex=this.getWdh().naechstesIntervall(groesse.getEnde());
         // TODO Indizes auf Gültigkeit prüfen
         // wenn endIndex > maxIntervallIndex dann setze endIndex auf
         // maxIntervallIndex
-        //
+        if (endindex>this.getWdh().maxIntervallIndex()) {
+            endindex=this.getWdh().maxIntervallIndex();
+        }
         // wenn endIndex < startIndex || endIndex < 0 || startIndex < 0 ||
         // endIndex > maxIntervallIndex
         // gib null zurück
-
-        //
+        if (endindex<startindex||endindex<0||startindex<0||endindex>this.getWdh().maxIntervallIndex()) {
+            return null;
+        }
         // TODO hier den Intervalliterator nutzen
         // Map erzeugen und die Wiederholungen einsammeln
+        Map <Datum,Termin> returnmap=new HashMap<>();
+        IntervallIterator<Datum> iterator = intervallIterator(startindex,endindex);
+        while(iterator.hasNext()) {
+
+        }
 
         return null;
     }
